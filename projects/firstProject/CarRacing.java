@@ -20,6 +20,8 @@ import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.BMW;
 import info.gridworld.actor.plymouth;
 
+import javax.swing.JOptionPane;
+
 /**
  * This class runs a world that contains a bug and a rock, added at random
  * locations. Click on empty locations to add additional actors. Click on
@@ -32,13 +34,16 @@ public class CarRacing
 {
     public static void main(String[] args)
     {
+        String player1 = JOptionPane.showInputDialog("Enter Player 1 Keylayout", "wasd/arrows");
+    	String player2 = JOptionPane.showInputDialog("Enter Player 2 Keylayout", "wasd/arrows");
+        
         ActorWorld world = new ActorWorld();
         
         Color bleu = new Color(0x33B5E5);
         Color me = new Color(0xE56333);
 
-        world.add(new BMW(bleu, world, "wasd"));
-        world.add(new plymouth(me, world, "arrows"));
+        world.add(new BMW(bleu, world, player1));
+        world.add(new plymouth(me, world, player2));
 
         world.show();
     }
