@@ -17,8 +17,7 @@
 import java.awt.Color;
 
 import info.gridworld.actor.ActorWorld;
-import info.gridworld.actor.BMW;
-import info.gridworld.actor.plymouth;
+import info.gridworld.actor.cycle;
 
 import javax.swing.JOptionPane;
 
@@ -34,16 +33,23 @@ public class CarRacing
 {
     public static void main(String[] args)
     {
-        String player1 = JOptionPane.showInputDialog("Enter Player 1 Keylayout", "wasd/arrows");
-    	String player2 = JOptionPane.showInputDialog("Enter Player 2 Keylayout", "wasd/arrows");
-        
         ActorWorld world = new ActorWorld();
-        
-        Color bleu = new Color(0x33B5E5);
-        Color me = new Color(0xE56333);
 
-        world.add(new BMW(bleu, world, player1));
-        world.add(new plymouth(me, world, player2));
+	    String p1n = JOptionPane.showInputDialog(null, "Enter Player 1 Name: ");
+	    if (p1n == null || p1n.equals("")) {p1n = "Blue";}
+	    //String p1k = JOptionPane.showInputDialog(null, "Enter Player 1 Key Config (wasd/arrows)");
+	    //if (p1k == null || p1k.equals("")) {p1k = "wasd";}
+	    String p2n = JOptionPane.showInputDialog(null, "Enter Player 2 Name: ");
+	    
+	    
+	    
+	    if (p2n == null || p2n.equals("")) {p2n = "Orange";}
+	    //String p2k = JOptionPane.showInputDialog(null, "Enter Player 2 Key Config (wasd/arrows):");
+	    //if (p2k == null || p2k.equals("")) {p2k = "arrows";}
+	    
+	    
+        world.add(new cycle(p1n, new Color(0x33b5e5), world, "wasd"));
+        world.add(new cycle(p2n, new Color(0xe56333), world, "arrows"));
 
         world.show();
     }

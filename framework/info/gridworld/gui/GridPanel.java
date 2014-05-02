@@ -62,7 +62,7 @@ public class GridPanel extends JPanel implements Scrollable,
         PseudoInfiniteViewport.Pannable
 {
     private static final int MIN_CELL_SIZE = 12;
-    private static final int DEFAULT_CELL_SIZE = 48;
+    private static final int DEFAULT_CELL_SIZE = 96;
     private static final int DEFAULT_CELL_COUNT = 10;
     private static final int TIP_DELAY = 1000;
 
@@ -70,7 +70,7 @@ public class GridPanel extends JPanel implements Scrollable,
     private int numRows, numCols, originRow, originCol;
     private int cellSize; // the size of each cell, EXCLUDING the gridlines
     private boolean toolTipsEnabled;
-    private Color backgroundColor = Color.WHITE;
+    private Color backgroundColor = Color.black;
     private ResourceBundle resources;
     private DisplayMap displayMap;
     private Location currentLocation;
@@ -86,7 +86,7 @@ public class GridPanel extends JPanel implements Scrollable,
     {
         displayMap = map;
         resources = res;
-        setToolTipsEnabled(true);
+        setToolTipsEnabled(false);
     }
 
     /**
@@ -160,7 +160,7 @@ public class GridPanel extends JPanel implements Scrollable,
                 (curClip.x + curClip.width - left + cellSize) / (cellSize + 1))
                 * (cellSize + 1) + left;
 
-        g2.setColor(Color.GRAY);
+        g2.setColor(Color.BLUE);
         for (int y = miny; y <= maxy; y += cellSize + 1)
             for (int x = minx; x <= maxx; x += cellSize + 1)
             {
@@ -170,7 +170,7 @@ public class GridPanel extends JPanel implements Scrollable,
                     g2.fillRect(x + 1, y + 1, cellSize, cellSize);
             }
 
-        g2.setColor(Color.BLACK);
+        g2.setColor(new Color(0x666666));
         for (int y = miny; y <= maxy; y += cellSize + 1)
             // draw horizontal lines
             g2.drawLine(minx, y, maxx, y);

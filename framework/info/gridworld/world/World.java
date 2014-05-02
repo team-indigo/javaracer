@@ -17,7 +17,7 @@
 package info.gridworld.world;
 
 import info.gridworld.actor.Actor;
-import info.gridworld.actor.BMW;
+import info.gridworld.actor.cycle;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
@@ -50,9 +50,16 @@ public class World<T>
     private static final int DEFAULT_COLS = 50;
 
     //host1 is our arrows
-    private Actor host1;
+    private cycle host1;
     //host2 is our WASD
-    private Actor host2;
+    private cycle host2;
+    
+    private String key1 = "LEFT";
+    private String key2 = "A";
+    private boolean stealth1;
+    private boolean stealth2;
+    private int count1 = 0;
+    private int count2 = 0;
 
     public World()
     {
@@ -215,48 +222,120 @@ public class World<T>
      */
     public boolean keyPressed(String description, Location loc)
     {
+    	System.out.println(description);
         //start arrow config
-        if(description.equals("UP")) {
+        if(description.equals("UP") && !(key1.equals(description))) {
             System.out.println(description);
             host1.setDirection(0);
-        } else if(description.equals("DOWN")) {
+            key1 = "DOWN";
+        } else if(description.equals("DOWN") && !(key1.equals(description))) {
             System.out.println(description);
             host1.setDirection(180);
-        } else if(description.equals("LEFT")) {
+            key1 = "UP";
+        } else if(description.equals("LEFT") && !(key1.equals(description))) {
+            System.out.println(description);
+	        host1.setDirection(270);
+	        key1 = "RIGHT";
+            //host1.setDirection(host1.getDirection() - 90);
+        } else if(description.equals("RIGHT") && !(key1.equals(description))) {
+            System.out.println(description);
+	        host1.setDirection(90);
+	        key1 = "LEFT";
+			
+			
+			
+        } else if(description.equals("UP") && (stealth1 == true)) {
+            System.out.println(description);
+            host1.setDirection(0);
+        } else if(description.equals("DOWN") && (stealth1 == true)) {
+            System.out.println(description);
+            host1.setDirection(180);
+        } else if(description.equals("LEFT") && (stealth1 == true)) {
             System.out.println(description);
 	        host1.setDirection(270);
             //host1.setDirection(host1.getDirection() - 90);
-        } else if(description.equals("RIGHT")) {
+        } else if(description.equals("RIGHT") && (stealth1 == true)) {
             System.out.println(description);
 	        host1.setDirection(90);
-            //host1.setDirection(host1.getDirection() + 90);
+			
+			
+			
+        } else if(description.equals("NUMPAD1")) {
+	        System.out.println(description);
+	        host1.setStealth();
+	        s1();
+        } else if (description.equals("NUMPAD2") && count1 > -1) {
+        	System.out.println(description);
+        	host1.jump();
+        	count1++;
+	       
 
         //start WASD config
-        } else if(description.equals("W")) {
+        } else if(description.equals("W") && !(key2.equals(description))) {
             System.out.println(description);
             host2.setDirection(0);
-        } else if(description.equals("S")) {
+            key2 = "S";
+        } else if(description.equals("S") && !(key2.equals(description))) {
             System.out.println(description);
             host2.setDirection(180);
-        } else if(description.equals("A")) {
+            key2 = "W";
+        } else if(description.equals("A") && !(key2.equals(description))) {
             System.out.println(description);
             host2.setDirection(270);
-        } else if(description.equals("D")) {
+            key2 = "D";
+        } else if(description.equals("D") && !(key2.equals(description))) {
             System.out.println(description);
             host2.setDirection(90);
+            key2 = "A";
+			
+			
+		} else if(description.equals("W") && (stealth2 == true)) {
+            System.out.println(description);
+            host2.setDirection(0);
+        } else if(description.equals("S") && (stealth2 == true)) {
+            System.out.println(description);
+            host2.setDirection(180);
+        } else if(description.equals("A") && (stealth2 == true)) {
+            System.out.println(description);
+            host2.setDirection(270);
+        } else if(description.equals("D") && (stealth2 == true)) {
+            System.out.println(description);
+            host2.setDirection(90);
+			
+			
+        } else if(description.equals("E")) {
+            System.out.println(description);
+            host2.setStealth();
+            s2();
+        } else if (description.equals("Q") && count2 > -1) {
+        	System.out.println(description);
+        	host2.jump();
+        	count2++;
         }
-
+        
         return true;
     }
 
-    public void setArrows(Actor x)
+    public void setArrows(cycle x)
     {
         host1 = x;
+        stealth1 = host1.getStealth();
+    }
+    
+    public void s1()
+    {
+        stealth1 = host1.getStealth();
     }
 
-    public void setWASD(Actor x)
+    public void setWASD(cycle x)
     {
         host2 = x;
+        stealth2 = host2.getStealth();
+    }
+    
+    public void s2()
+    {
+        stealth2 = host2.getStealth();
     }
 
     /**

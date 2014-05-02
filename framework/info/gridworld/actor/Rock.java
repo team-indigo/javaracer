@@ -28,14 +28,14 @@ public class Rock extends Actor
 {
     
     
-    private static final Color DEFAULT_COLOR = Color.BLACK;
+    //private static final Color DEFAULT_COLOR = Color.BLACK;
 
     /**
      * Constructs a black rock.
      */
     public Rock()
     {
-        setColor(DEFAULT_COLOR);
+        //setColor(DEFAULT_COLOR);
     }
 
     /**
